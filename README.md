@@ -13,7 +13,7 @@ Requires a Riot Games API key
     api = RGA(API_KEY, 'region')
 
     # Retrieve all champions
-    print(api.get_all_champions(free_to_play))
+    print(api.get_all_champions('free_to_play'))
 
     # Get recent games by summoner ID
     print(api.get_recent_games(id))
