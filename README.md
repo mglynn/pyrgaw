@@ -5,6 +5,7 @@ Python Riot Games API Wrapper
 ## Usage
 
 Requires a Riot Games API key
+    
     from pyrgaw import RGA
 
     API_KEY = 'Your API Key'
