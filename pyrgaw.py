@@ -12,6 +12,7 @@ class RGA():
         self.region = region
         self.url_v11 = 'https://prod.api.pvp.net/api/lol/{0}/v1.1'.format(self.region)
         self.url_v12 = 'https://prod.api.pvp.net/api/lol/{0}/v1.2'.format(self.region)
+        self.url_v13 = 'https://prod.api.pvp.net/api/lol/{0}/v1.3'.format(self.region)
         self.url_v22 = 'https://prod.api.pvp.net/api/lol/{0}/v2.2'.format(self.region)
 
     # Private functions
@@ -40,10 +41,10 @@ class RGA():
         url = ''.join("{0}/champion?freeToPlay={1}".format(self.url_v11, free_to_play))
         return self.send_request(url)
 
-    # game-v1.2 [NA, EUW, EUNE]
+    # game-v1.3 [NA, EUW, EUNE]
     def get_recent_games(self, id):
         """Get recent games by summoner ID"""
-        url = ''.join("{0}/game/by-summoner/{1}/recent?".format(self.url_v12, id))
+        url = ''.join("{0}/game/by-summoner/{1}/recent?".format(self.url_v13, id))
         return self.send_request(url)
 
     # league-v2.2 [EUNE, EUW, NA, TR, BR]
