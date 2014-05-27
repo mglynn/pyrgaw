@@ -106,6 +106,7 @@ Requires a Riot Games API key
     # Get rune pages mapped by summoner ID for a given list of summoner IDs
     print(rga.get_rune_pages('region', 'summoner_ids'))
 
+
     # TEAM
     # Get teams mapped by summoner ID for a given list of summoner IDs
     print(rga.get_teams('region' 'summoner_ids'))
