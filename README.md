@@ -115,4 +115,4 @@ Requires a Riot Games API key
     print(rga.get_list_of_teams('region', 'team_ids'))
 
 
-"This product is not endorsed, certified or otherwise approved in any way by Riot Games, Inc. or any of its affiliates."
+This product is not endorsed, certified or otherwise approved in any way by Riot Games, Inc. or any of its affiliates.
