@@ -9,110 +9,109 @@ Requires a Riot Games API key
     import pyrgaw
 
     API_KEY = 'Your API Key'
+    api = pyrgaw.RGA('region', API_KEY)
+    
 
-    rga = pyrgaw.RGA(API_KEY)
-
-
-    # CHAMPION
+    ----------CHAMPION----------
     # Retrieve all champions
-    print(rga.get_all_champions('region'))
-    print(rga.get_all_champions('region', 'true'))
+    print(api.get_all_champions())
+    print(api.get_all_champions('true'))
 
     # Retrieves champion by ID
-    print(rga.get_champion('region', '1'))
+    print(api.get_champion('1'))
+    
 
-
-    # GAME
+    ----------GAME----------
     # Get recent games by summoner ID
-    print(rga.get_recent_games('region', 'summoner_id'))
+    print(api.get_recent_games('summoner_id')))
+    
 
-
-    # LEAGUE
+    ----------LEAGUE----------
     # Get leagues mapped by summoner ID for a given list of summoner IDs
-    print(rga.get_summoner_leagues('region', summoner_ids))
+    print(api.get_summoner_leagues(summoner_ids))
 
     # Get league entries mapped by summoner ID for a given list of summoner IDs
-    print(rga.get_summoner_league_entries('region', summoner_ids))
+    print(api.get_summoner_league_entries(summoner_ids))
 
     # Get leagues mapped by team ID for a given list of team IDs
-    print(rga.get_team_leagues('region', team_ids))
+    print(api.get_team_leagues(team_ids))
 
     # Get league entries mapped by team ID for a given list of team IDs
-    print(rga.get_team_league_entries('region', team_ids))
+    print(api.get_team_league_entries(team_ids))
 
     # Get challenger tier leagues
-    print(rga.get_challenger_leagues('region', 'queue_type'))
+    print(api.get_challenger_leagues('queue_type'))
     
-
-    # STATIC DATA
+    
+    ----------STATIC DATA----------
     # Retrieves champion list
-    print(rga.get_champion_list('region', 'locale', 'version', 'data_by_id', 'champ_data'))
+    print(api.get_champion_list('locale', 'version', 'data_by_id', 'champ_data'))
 
     # Retrieves a champion by its id
-    print(rga.get_champion_static('region', 'id', 'locale', 'version', 'champ_data'))
+    print(api.get_champion_static('id', 'locale', 'version', 'champ_data'))
 
-    # Retrieves item list"
-    print(rga.get_item_list('region', 'locale', 'version', 'item_list_data'))
+    # Retrieves item list
+    print(api.get_item_list('locale', 'version', 'item_list_data'))
 
     # Retrieves item by its unique id
-    print(rga.get_item('region', 'id', 'locale', 'version', 'item_data'))
+    print(api.get_item('id', 'locale', 'version', 'item_data'))
 
     # Retrieves mastery list
-    print(rga.get_mastery_list('region', 'locale', 'version', 'mastery_list_data'))
+    print(api.get_mastery_list('locale', 'version', 'mastery_list_data'))
 
     # Retrieves mastery item by its unique id
-    print(rga.get_mastery('region', 'id', 'locale', 'version', 'mastery_data'))
+    print(api.get_mastery('id', 'locale', 'version', 'mastery_data'))
 
     # Retrieves realm data
-    print(rga.get_realm_list('region'))
+    print(api.get_realm_list())
 
     # Retrieves rune list
-    print(rga.get_rune_list('region', 'locale', 'version', 'rune_list_data'))
+    print(api.get_rune_list('locale', 'version', 'rune_list_data'))
 
     # Retrieves rune by its unique id
-    print(rga.get_rune('region', 'id', 'locale', 'version', 'rune_data'))
+    print(api.get_rune('id', 'locale', 'version', 'rune_data'))
 
     # Retrieves summoner spell list
-    print(rga.get_summoner_spell_list('region', 'locale', 'version', 'data_by_id', 'spell_data'))
+    print(api.get_summoner_spell_list('locale', 'version', 'data_by_id', 'spell_data'))
 
     # Retrieves summoner spell by its unique id
-    print(rga.get_summoner_spell('region', 'id', 'locale', 'version', 'spell_data'))
+    print(api.get_summoner_spell('id', 'locale', 'version', 'spell_data'))
 
     # Retrieve version data
-    print(rga.get_versions('region'))
+    print(api.get_versions())
 
     
-    # STATS
+    ----------STATS----------
     # Get ranked stats by summoner ID
-    print(rga.get_ranked_stats('region', 'summoner_id', 'season'))
+    print(api.get_ranked_stats('summoner_id', 'season'))
 
     # Get player stats summaries by summoner ID
-    print(rga.get_player_stats_summaries('region', 'summoner_id', 'season'))
+    print(api.get_player_stats_summaries('summoner_id', 'season'))
 
 
-    # SUMMONER
+    ----------SUMMONER----------
     # Get summoner objects mapped by standardized summoner name for a given list of summoner names
-    print(rga.get_summoner_by_name('region', 'summoner_names'))
+    print(api.get_summoner_by_name('summoner_names'))
 
     # Get summoner objects mapped by summoner ID for a given list of summoner IDs
-    print(rga.get_summoner_objects('region', 'summoner_ids'))
+    print(api.get_summoner_objects('summoner_ids'))
 
     # Get mastery pages mapped by summoner ID for a given list of summoner IDs
-    print(rga.get_mastery_pages('region', 'summoner_ids'))
+    print(api.get_mastery_pages('summoner_ids'))
 
     # Get summoner names mapped by summoner ID for a given list of summoner IDs
-    print(rga.get_summoner_by_id('region', 'summoner_ids'))
+    print(api.get_summoner_by_id('summoner_ids'))
 
     # Get rune pages mapped by summoner ID for a given list of summoner IDs
-    print(rga.get_rune_pages('region', 'summoner_ids'))
+    print(api.get_rune_pages('summoner_ids'))
 
 
-    # TEAM
+    ----------TEAMS----------
     # Get teams mapped by summoner ID for a given list of summoner IDs
-    print(rga.get_teams('region' 'summoner_ids'))
+    print(api.get_teams('summoner_ids'))
 
     # Get teams mapped by team ID for a given list of team IDs
-    print(rga.get_list_of_teams('region', 'team_ids'))
+    print(api.get_list_of_teams('team_ids'))
 
 
 This product is not endorsed, certified or otherwise approved in any way by Riot Games, Inc. or any of its affiliates.
