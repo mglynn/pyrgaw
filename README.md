@@ -79,6 +79,24 @@ Requires a Riot Games API key
 
     # Retrieve version data
     print(api.get_versions())
+    
+    
+    ----------STATUS----------
+    # Get shard list
+    print(api.get_shards())
+    
+    # Get shard status
+    print(api.get_shards_region())
+    
+    
+    ----------MATCH----------
+    # Retrieve match by match ID
+    print(api.get_match('match_id', 'include_timeline'))
+    
+    
+    ----------MATCH History----------
+    # Retrieve match history by summoner ID
+    print(api.get_match_history('summoner_id', 'champion_ids', 'ranked_queues', 'begin_index', 'end_index'))
 
     
     ----------STATS----------
