@@ -16,8 +16,9 @@ class RGA():
                           'kr': 'kr.api.pvp.net', 'las': 'las.api.pvp.net', 'lan': 'lan.api.pvp.net',
                           'na': 'na.api.pvp.net', 'oce': 'oce.api.pvp.net', 'tr': 'tr.api.pvp.net',
                           'ru': 'ru.api.pvp.net'}
-        self.versions = {'champion': '/v1.2/champion', 'game': '/v1.3/game', 'league': '/v2.4/league',
-                         'static': '/v1.2', 'stats': '/v1.3/stats', 'summoner': '/v1.4', 'team': '/v2.3/team'}
+        self.versions = {'champion': '/v1.2/champion', 'game': '/v1.3/game', 'league': '/v2.5/league',
+                         'static': '/v1.2', 'match': '/v2.2/match', 'matchhistory': '/v2.2/matchhistory',
+                         'stats': '/v1.3/stats', 'summoner': '/v1.4', 'team': '/v2.4/team'}
         self.url = ''.join("https://{}/api/lol/".format(self.endpoints[self.region]))
         self.url_static = 'https://global.api.pvp.net/api/lol/static-data/'
         self.current_season = 'SEASON4'
@@ -35,7 +36,7 @@ class RGA():
     @staticmethod
     def get_response_error(status):
         """Raise status code exception"""
-        status_codes = {400: 'Bad request', 401: 'Unauthorized', 404: 'Not found',
+        status_codes = {400: 'Bad request', 401: 'Unauthorized', 403: 'Forbidden', 404: 'Not found',
                         429: 'Rate limit exceeded', 500: 'Internal server error', 503: 'Service unavailable'}
         if status in status_codes:
             raise ResponseException(''.join("{} - {}".format(status, status_codes[status])))
@@ -59,7 +60,7 @@ class RGA():
         url = ''.join("{}{}{}/by-summoner/{}/recent?".format(self.url, self.region, self.versions['game'], summoner_id))
         return self.send_request(url)
 
-    # LEAGUE -- league-v2.4 [BR, EUNE, EUW, LAN, LAS, NA, OCE]
+    # LEAGUE -- league-v2.5 [BR, EUNE, EUW, LAN, LAS, NA, OCE]
     def get_summoner_leagues(self, summoner_ids):
         """Get leagues mapped by summoner ID for a given list of summoner IDs"""
         url = ''.join("{}{}{}/by-summoner/{}?"
@@ -159,6 +160,32 @@ class RGA():
         url = ''.join("{}{}{}/versions?".format(self.url_static, self.region, self.versions['static']))
         return self.send_request(url)
 
+    # STATUS -- lol-status-v1.0 [BR, EUNE, EUW, KR, LAN, LAS, NA, OCE, RU,TR]
+    def get_shards(self):
+        """Get shard list."""
+        url = 'http://status.leagueoflegends.com/shards'
+        return self.send_request(url)
+
+    def get_shards_region(self):
+        """Get shard status."""
+        url = ''.join("{}{}").format('http://status.leagueoflegends.com/shards/', self.region)
+        return self.send_request(url)
+
+    # MATCH -- match-v2.2 [BR, EUNE, EUW, KR, LAN, LAS, NA, OCE, PBE, RU, TR]
+    def get_match(self, match_id, include_timeline=False):
+        """Retrieve match by match ID."""
+        url = ''.join("{}{}{}/{}?includeTimeline={}")\
+            .format(self.url, self.region, self.versions['match'], match_id, include_timeline)
+        return self.send_request(url)
+
+    # MATCH HISTORY -- matchhistory-v2.2 [BR, EUNE, EUW, KR, LAN, LAS, NA, ICE, PBE, RU, TR]
+    def get_match_history(self, summoner_id, champion_ids='', ranked_queues='', begin_index='', end_index=''):
+        """Retrieve match history by summoner ID."""
+        url = ''.join("{}{}{}/{}?championIds={}&rankedQueues={}&beginIndex={}&endIndex={}")\
+            .format(self.url, self.region, self.versions['matchhistory'], summoner_id, champion_ids,
+                    ranked_queues, begin_index, end_index)
+        return self.send_request(url)
+
     # STATS -- stats-v1.3 [BR, EUNE, EUW, LAN, LAS, NA, OCE]
     def get_ranked_stats(self, summoner_id, season=None):
         """Get ranked stats by summoner ID"""
@@ -207,7 +234,7 @@ class RGA():
                       .format(self.url, self.region, self.versions['summoner'], ','.join(summoner_ids)))
         return self.send_request(url)
 
-    # TEAM -- team-v2.3 [BR, EUNE, EUW, LAN, LAS, NA, OCE]
+    # TEAM -- team-v2.4 [BR, EUNE, EUW, LAN, LAS, NA, OCE]
     def get_teams(self, summoner_ids):
         """Get teams mapped by summoner ID for a given list of summoner IDs"""
         url = ''.join("{}{}{}/by-summoner/{}?"
